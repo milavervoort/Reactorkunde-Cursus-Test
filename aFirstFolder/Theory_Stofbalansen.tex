@@ -60,6 +60,59 @@ Om de tijd \(t\) te berekenen die nodig is om van een initiële concentratie \(C
 t = \int_{C_A}^{C_{A0}} \frac{dC_A}{-R_A(C_A)}
 \]
 
+\begin{image}
+\begin{tikzpicture}
+\begin{axis}[
+    domain=0:0.95,
+    samples=200,
+    xmin=0, xmax=1,
+    ymin=0, ymax=12,
+    axis lines=left,
+    xlabel={$X_A$},
+    ylabel={$\frac{1}{-r_A}$},
+]
+
+% parameters
+\addplot[ultra thick, blue]
+{1/(1*(1-x))};
+
+\end{axis}
+\end{tikzpicture}
+\end{image}
+
+\begin{image}
+\begin{tikzpicture}
+\begin{axis}[
+    domain=0.1:1,       % x loopt van 0 tot C_A0
+    samples=200,
+    xmin=0, xmax=1,
+    ymin=0, ymax=12,
+    axis lines=left,
+    xlabel={$C_A$},
+    ylabel={$\frac{1}{-r_A}$},
+]
+
+% parameters
+\def\k{1}   % snelheidsconstante
+
+% plot de curve
+\addplot[ultra thick, blue] {1/(\k*x)};
+
+% arceer het gebied tussen C_A_end en C_A0
+\addplot [
+    thick,
+    fill=blue!20,
+    domain=0.2:1,   % van C_A,e tot C_A0
+    samples=100
+] {1/(\k*x)} \closedcycle;
+
+% Voeg een t label toe in het gearceerde gebied
+\node at (axis cs:0.6,6) {$t$};
+
+\end{axis}
+\end{tikzpicture}
+\end{image}
+
 \textbf{Voorbeeld eerste orde reactie:} \(R_A = -k C_A\)
 
 \[
@@ -69,6 +122,48 @@ t = \int_{C_A}^{C_{A0}} \frac{dC_A}{-R_A(C_A)}
 \[
 t = \frac{1}{k} \ln \frac{C_{A0}}{C_A}
 \]
+
+\begin{image}
+\begin{tikzpicture}
+\begin{axis}[
+    domain=0.15:1,
+    samples=200,
+    xmin=0, xmax=1,
+    ymin=0, ymax=20,
+    axis lines=left,
+    xlabel={$C_A$},
+    ylabel={$\frac{1}{-r_A}$},
+    legend pos=north west,
+]
+
+\addplot[ultra thick, blue] {1/x};
+\addlegendentry{1st order}
+
+\addplot[ultra thick, green!60!black] {1/(x^2)};
+\addlegendentry{2nd order}
+
+\end{axis}
+\end{tikzpicture}
+\end{image}
+
+\begin{image}
+\begin{tikzpicture}
+\begin{axis}[
+    domain=0.05:0.95,
+    samples=200,
+    xmin=0, xmax=1,
+    ymin=0, ymax=25,
+    axis lines=left,
+    xlabel={$X_A$},
+    ylabel={$\frac{1}{-r_A}$},
+]
+
+\addplot[ultra thick, purple]
+{1/(x*(1-x))};
+
+\end{axis}
+\end{tikzpicture}
+\end{image}
 
 \section*{2. CSTR (Continuous Stirred Tank Reactor)}
 
